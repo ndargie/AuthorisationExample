@@ -1,0 +1,25 @@
+﻿@model LoginViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+<form asp-controller="Auth" asp-action="Login" method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <div class="container">
+
+        <img src="~/Images/defaultUser.png" alt="Avatar" class="avatar" />
+
+        <label class="loginLabel">Username</label>
+        <input class="loginInput" asp-for="Username" />
+
+        <label class="loginLabel">Password</label>
+        <input class="loginInput" asp-for="Password" />
+
+        <button type="submit">Sign In</button>
+    </div>
+</form>
+<div class="container">
+    <div>
+        <a asp-controller="Auth" asp-action="Register"
+           asp-route-returnUrl="@Model.ReturnUrl">Register</a>
+    </div>
+</div>

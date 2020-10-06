@@ -1,0 +1,56 @@
+﻿@{ 
+    Layout = "~/Views/_Layout.cshtml";
+} 
+
+<section id="widget-grid" class="">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-6">
+            <h1 class="page-title text-color-blueDark"><i class="fa-fw fa fa-check-square-o"></i>@Zetes.Resources.Resources.WorkItemPageTitle</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="jarviswidget jarviswidget-color-blueLight" id="wid-id-workitem-list"
+             data-widget-editbutton="false"
+             data-widget-deletebutton="false"
+             data-widget-collapsebutton="false"
+             data-widget-sortable="false">
+
+            <header>
+                <span class="widget-icon"></span>
+            </header>
+
+            <div>
+                <div class="jarviswidget-editbox">
+
+                </div>
+
+                <div class="widget-body" id="widget-body">
+
+                </div>
+
+                <div style="clear:both;color:yellow">
+
+                    @(Html.Kendo()
+                        .Grid<Zetes.Dtos.WorkItemDto>()
+                        .Name("GridWorkItems")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(c => c.OrderNumber);
+                            columns.Bound(c => c.Customer);
+                            columns.Bound(c => c.Quote).Format("{0:0.00}");
+                            columns.Bound(c => c.Status);
+                        })
+                        .Pageable(pager => pager.Refresh(true).Messages(message => message.Refresh(Zetes.Resources.Resources.LabelRefresh)))
+                        .Filterable()
+                        .Sortable()
+                        .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .PageSize(10)
+                        .Model(model => model.Id(m => m.Id))
+                        .Read(read => read.Action("GetForList", "WorkItem"))))
+                    @(Html.Kendo().DatePicker().Name("my-picker"))
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

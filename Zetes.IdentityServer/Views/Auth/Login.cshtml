@@ -1,0 +1,27 @@
+﻿@model LoginViewModel
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="wrapper fadeinDown">
+
+    <div id="formContent">
+        <div class="fadeIn first">
+            <img src="~/Content/Icons/defaultUser.png" id="icon" alt="User Icon" />
+        </div>
+        @using (Html.BeginForm("Login", "Auth", "POST"))
+        {
+            @Html.AntiForgeryToken();
+
+            @Html.HiddenFor(m => m.ReturnUrl)
+
+            @Html.TextBoxFor(m => m.Username, new { @class = "fadeIn second", placeholder = Html.DisplayNameFor(model => model.Username) })
+            @Html.ValidationMessageFor(m => m.Username);
+
+            @Html.PasswordFor(m => m.Password, new { @class = "fadeIn third", placeholder = Html.DisplayNameFor(model => model.Password) })
+            @Html.ValidationMessageFor(m => m.Password);
+
+            <button type="submit" class="fadeIn fourth" value="Log In"></button>
+        }
+    </div>
+</div>

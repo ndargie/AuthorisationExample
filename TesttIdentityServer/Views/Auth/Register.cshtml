@@ -1,0 +1,33 @@
+﻿@model RegisterViewModel
+@{ 
+    Layout = "~/Views/_Layout.cshtml";
+}
+    <form asp-controller="Auth" asp-action="Register" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="container">
+            <label class="loginLabel">Username</label>
+            <input class="loginInput" asp-for="Username" />          
+            <div class="validationcentered" style="text-align:center">
+                @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @style = "color:red;!important" })
+            </div>
+
+            <label class="loginLabel">Password</label>
+            <input class="loginInput" asp-for="Password" />          
+            <div class="validationcentered" style="text-align:center">
+                @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @style = "color:red;!important" })
+            </div>
+
+            <label class="loginLabel">Confirm Password</label>
+            <input class="loginInput" asp-for="ConfirmPassword" />            
+            <div class="validationcentered" style="text-align:center">
+                @Html.ValidationMessageFor(m => m.Password, string.Empty, new { @style = "color:red;!important" })
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </div>          
+    </form>
+
+<div>
+    <a asp-controller="Auth" asp-action="Login"
+       asp-route-returnUrl="@Model.ReturnUrl">Back To Login</a>
+</div>

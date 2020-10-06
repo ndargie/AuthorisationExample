@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@model Test.Dtos.WorkItemDto;
+
+<div>
+    <h1>Update Work Item</h1>
+</div>
+
+<div>
+    <div>
+        @Html.HiddenFor(m => m.Id);
+    </div>
+    <div>
+        @Html.LabelFor(m => m.OrderNumber);
+        @Html.TextBoxFor(m => m.OrderNumber, new { @readonly = "readonly" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Quote);
+        @Html.TextBoxFor(m => m.Quote, "{0:G29}")
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Description);
+        @Html.TextAreaFor(m => m.Description);
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.InvoicePaid);
+        @Html.HiddenFor(m => m.InvoiceRaised);
+        @Html.HiddenFor(m => m.Started);
+        @Html.HiddenFor(m => m.Finished);
+        @Html.HiddenFor(m => m.QuoteRaised);
+    </div>
+
+</div>

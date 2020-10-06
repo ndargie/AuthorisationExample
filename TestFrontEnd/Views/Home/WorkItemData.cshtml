@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div>
+    <h1>Work Item Data</h1>
+</div>
+
+<div>
+    @(Html.Kendo()
+            .Grid<WorkItemDto>()
+            .Name("GridTestData")
+            .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("_EditWorkItem"))
+            .Columns(columns =>
+            {
+                columns.Bound(c => c.OrderNumber);
+                columns.Bound(c => c.Description);
+                columns.Bound(c => c.Quote);
+                columns.Bound(c => c.QuoteRaised);
+                columns.Bound(c => c.Started);
+                columns.Bound(c => c.Finished);
+                columns.Bound(c => c.InvoiceRaised);
+                columns.Bound(c => c.InvoicePaid);
+            })
+            .Pageable(pager => pager.Refresh(true).Messages(message => message.Refresh("Refresh")))
+            .Filterable()
+            .Sortable()
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(10)
+            .Model(model => model.Id(m => m.Id))
+            .Read(read =>
+            read.Action("GetWorkItems", "Home"))
+            .Update(update => update.Action("UpdateWorkItem", "Home"))
+            .Events(events => events.Error("OnError"))
+            )
+    )
+</div>
+
+<script>
+    function OnError(e) {
+        debugger;
+        console.log(e);
+    }
+</script>
